@@ -12,19 +12,22 @@ class Tasiscomplete(BaseModel):
     is_competed: bool
 
 class Task(TaskBase):
-    task_id: int
-    owner_id : int
+    task_id: str
+    owner_id : str
     is_competed: bool
     
 
     class Config:
         orm_mode = True
 
-class TaskUpdate(TaskBase):
-    pass
+class TaskUpdate(BaseModel):
+    task_title: str | None = None
+    task_description: str | None = None
+    is_competed: bool | None = None
+
 
 class TaskReturn(BaseModel):
-    task_id: int
+    task_id: str
     task_title:str
     task_description: str | None = None
     is_competed: bool
@@ -45,7 +48,7 @@ class CustomerUpdate(CusBase):
     pass
 
 class Customer(CusBase):
-    cus_id: int
+    cus_id: str
     tasks: list[Task] = []
     
     class Config:
